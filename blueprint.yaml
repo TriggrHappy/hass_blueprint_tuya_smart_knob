@@ -104,6 +104,18 @@ blueprint:
           max: 4.0
           step: 0.1
           unit_of_measurement: seconds
+    automation_mode:
+      name: Automation Mode
+      description: "Experiment with the different modes if your experience does not feel smooth enough. Normally single should work alright. (Also see https://www.home-assistant.io/docs/automation/modes/ )"
+      default: single
+      selector:
+        select:
+          mode: dropdown
+          options:
+            - single
+            - restart
+            - queued
+            - parallel
 
 trigger:
   - platform: mqtt
@@ -209,4 +221,5 @@ action:
                 {% endif %}
               transition: !input light_transition
 
-mode: single
+mode: !input automation_mode
+max_exceeded: silent
