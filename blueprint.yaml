@@ -135,7 +135,13 @@ condition: []
 action:
   - variables:
       command: "{{ trigger.payload_json.action }}"
-      step_size: "{{ trigger.payload_json.action_step_size | default(13) }}"
+      raw_step_size: "{{ trigger.payload_json.action_step_size | default(none) }}"
+      step_size: >-
+        {% if raw_step_size is not none and raw_step_size != '' %}
+          {{ raw_step_size | int }}
+        {% else %}
+          13
+        {% endif %}
       step_percent: "{{ (step_size / 13) | int }}"
       brightness_multiplier: !input brightness_multiplier
       step_multiplier: !input step_multiplier
