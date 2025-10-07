@@ -1,5 +1,5 @@
 blueprint:
-  name: "Control light entity with Tuya ERS-10TZBVK-AA Smart Knob (command mode)"
+  name: "Control light entity with Tuya ERS-10TZBVK-AA Smart Knob (command mode) - v 1.1"
   description: >
     Blueprint to easily configure the **Tuya ERS-10TZBVK-AA Smart Knob** to control a light entity when integrated into Home Assistant using **Zigbee2MQTT**.
 
@@ -19,6 +19,8 @@ blueprint:
     <summary><b>Actions</b></summary>
     
      - Press button: Toggle light
+
+     - Long press: Choose any Action.
      
      - Turn left/right: Change brightness / dim light
      
@@ -53,9 +55,9 @@ blueprint:
         entity:
           filter:
             - domain: light
-    hold_action:
+    long_press_action:
       name: Long Press Action
-      description: "Choose an action for button long press. Leave blank if you do not want to use it."
+      description: "Choose an action for button long press (>3 seconds). Leave blank if you do not want to use it."
       default: []
       selector:
         action: {}
