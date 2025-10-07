@@ -125,6 +125,12 @@ blueprint:
             - restart
             - queued
             - parallel
+    hold_action:
+      name: Long Press Action
+      description: "Choose an action for button long press. Leave blank if you do not want to use it."
+      default: []
+      selector:
+        action: {}
 
 trigger:
   - platform: mqtt
@@ -236,6 +242,10 @@ action:
                   2800
                 {% endif %}
               transition: !input light_transition
+        - conditions:
+            - condition: template
+              value_template: "{{ command == 'hue_move' }}"
+          sequence: !input long_press_action        
 
 mode: !input automation_mode
 max_exceeded: silent
