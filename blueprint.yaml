@@ -53,6 +53,12 @@ blueprint:
         entity:
           filter:
             - domain: light
+    hold_action:
+      name: Long Press Action
+      description: "Choose an action for button long press. Leave blank if you do not want to use it."
+      default: []
+      selector:
+        action: {}
     brightness_multiplier:
       name: Brightness Step Multiplier
       description: "Multiplier for brightness change per knob click. Higher values = faster brightness changes."
@@ -125,12 +131,6 @@ blueprint:
             - restart
             - queued
             - parallel
-    hold_action:
-      name: Long Press Action
-      description: "Choose an action for button long press. Leave blank if you do not want to use it."
-      default: []
-      selector:
-        action: {}
 
 trigger:
   - platform: mqtt
@@ -242,10 +242,10 @@ action:
                   2800
                 {% endif %}
               transition: !input light_transition
-        - conditions:
+      - conditions:
             - condition: template
               value_template: "{{ command == 'hue_move' }}"
-          sequence: !input long_press_action        
+        sequence: !input long_press_action        
 
 mode: !input automation_mode
 max_exceeded: silent
