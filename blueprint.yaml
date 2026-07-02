@@ -219,7 +219,7 @@ action:
             target:
               entity_id: !input light_entity
             data:
-              kelvin: >-
+              color_temp_kelvin: >-
                 {% set current_kelvin = state_attr(light_entity, 'color_temp_kelvin') %}
                 {% if current_kelvin is not none %}
                   {{ [current_kelvin + (step_percent * step_multiplier), kelvin_max] | min }}
@@ -236,7 +236,7 @@ action:
             target:
               entity_id: !input light_entity
             data:
-              kelvin: >-
+              color_temp_kelvin: >-
                 {% set current_kelvin = state_attr(light_entity, 'color_temp_kelvin') %}
                 {% if current_kelvin is not none %}
                   {{ [current_kelvin - (step_percent * step_multiplier), kelvin_min] | max }}
